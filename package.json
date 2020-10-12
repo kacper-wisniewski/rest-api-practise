@@ -5,6 +5,9 @@
   "repository": "git@github.com:kacper-wisniewski/rest-api-practise.git",
   "author": "Kacper Wiśniewski <kaka1341@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "cd client && yarn install && yarn build",
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",

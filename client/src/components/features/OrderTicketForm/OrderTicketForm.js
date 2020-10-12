@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from
 
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooserContainer';
+import { loadSeats } from '../../../redux/seatsRedux';
 
 class OrderTicketForm extends React.Component {
 
@@ -14,13 +15,27 @@ class OrderTicketForm extends React.Component {
       seat: '',
     },
     isError: false,
+    intervalFunction: loadSeats(),
+  }
+
+  componentDidMount () {
+    const { intervalFunction } = this.state
+    
+    setInterval( intervalFunction, 120000);
+  }
+
+
+  componentWillUnmount () {
+    this.setState({ intervalFunction: {} });
   }
 
   updateSeat = (e, seatId) => {
     const { order } = this.state;
-
+    const { loadSeats } = this.props;
+   
     e.preventDefault();
     this.setState({ order: { ...order, seat: seatId }});
+    loadSeats();
   }
 
   updateTextField = ({ target }) => {
